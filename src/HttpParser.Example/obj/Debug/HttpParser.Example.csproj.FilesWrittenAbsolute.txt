@@ -1,0 +1,4 @@
+/Users/kswiber/projects/HttpParser/build/HttpParser.Example.exe.mdb
+/Users/kswiber/projects/HttpParser/build/HttpParser.Example.exe
+/Users/kswiber/projects/HttpParser/src/HttpParser.Example/obj/Debug/HttpParser.Example.exe
+/Users/kswiber/projects/HttpParser/src/HttpParser.Example/obj/Debug/HttpParser.Example.exe.mdb

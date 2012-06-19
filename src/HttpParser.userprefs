@@ -1,0 +1,21 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="HttpParser/HttpParser.cs">
+    <Files>
+      <File FileName="HttpParser/HttpParser.cs" Line="78" Column="31" />
+      <File FileName="HttpParser.Example/Main.cs" Line="29" Column="4" />
+      <File FileName="../../libuv-csharp/src/Libuv/UV.cs" Line="111" Column="12" />
+      <File FileName="../../libuv-csharp/src/Libuv/UVStream.cs" Line="63" Column="31" />
+      <File FileName="../../libuv-csharp/src/Libuv/TcpServer.cs" Line="30" Column="44" />
+      <File FileName="../../libuv-csharp/src/Libuv/TimerWatcher.cs" Line="1" Column="1" />
+      <File FileName="../../libuv-csharp/src/Libuv/ChildProcess.cs" Line="31" Column="43" />
+      <File FileName="../../libuv-csharp/src/Libuv.Tests/webserver.cs" Line="30" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/kswiber/projects/HttpParser/src/HttpParser.Example/Main.cs" line="39" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
