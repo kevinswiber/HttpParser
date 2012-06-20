@@ -1,21 +1,45 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="HttpParser/HttpParser.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HttpParser/NativeHttpParser.cs">
     <Files>
-      <File FileName="HttpParser/HttpParser.cs" Line="78" Column="31" />
-      <File FileName="HttpParser.Example/Main.cs" Line="29" Column="4" />
-      <File FileName="../../libuv-csharp/src/Libuv/UV.cs" Line="111" Column="12" />
-      <File FileName="../../libuv-csharp/src/Libuv/UVStream.cs" Line="63" Column="31" />
+      <File FileName="HttpParser/HttpParser.cs" Line="148" Column="21" />
+      <File FileName="HttpParser.Example/Main.cs" Line="68" Column="6" />
+      <File FileName="../../libuv-csharp/src/Libuv/UV.cs" Line="195" Column="33" />
+      <File FileName="../../libuv-csharp/src/Libuv/UVStream.cs" Line="74" Column="26" />
       <File FileName="../../libuv-csharp/src/Libuv/TcpServer.cs" Line="30" Column="44" />
       <File FileName="../../libuv-csharp/src/Libuv/TimerWatcher.cs" Line="1" Column="1" />
       <File FileName="../../libuv-csharp/src/Libuv/ChildProcess.cs" Line="31" Column="43" />
       <File FileName="../../libuv-csharp/src/Libuv.Tests/webserver.cs" Line="30" Column="40" />
+      <File FileName="HttpParser/NativeHttpParser.cs" Line="14" Column="16" />
+      <File FileName="HttpParser/Enums.cs" Line="56" Column="15" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="HttpParser" expanded="True" />
+          <Node name="HttpParser.Example" expanded="True" selected="True" />
+          <Node name="Libuv" expanded="True" />
+          <Node name="Libuv.Tests" expanded="True" />
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>parser.status_code</Value>
+          <Value>parser.state</Value>
+          <Value>parser.upgrade</Value>
+          <Value>parser.header_state</Value>
+          <Value>parser.typeAndFlags</Value>
+          <Value>label</Value>
+          <Value>httpParser</Value>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/kswiber/projects/HttpParser/src/HttpParser.Example/Main.cs" line="39" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

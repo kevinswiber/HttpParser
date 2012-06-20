@@ -132,7 +132,7 @@ namespace HttpParser
 		
 		public int HttpErrNo
 		{
-			get { return _parser.httpErrNoAndUpgrade & 0127; }
+			get { return _parser.httpErrNoAndUpgrade & 0x127; }
 		}
 		
 		public int Upgrade

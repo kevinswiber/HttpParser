@@ -11,9 +11,9 @@ namespace HttpParser.Native
 	public class NativeHttpParser
 	{
 		[DllImport("http_parser")]
-		public static unsafe extern void http_parser_init(ref http_parser parser, HttpParserType type);
+		public static extern void http_parser_init(ref http_parser parser, HttpParserType type);
 		[DllImport("http_parser")]
-		public static unsafe extern uint http_parser_execute(ref http_parser parser, ref http_parser_settings settings, string data, uint len);
+		public static extern uint http_parser_execute(ref http_parser parser, ref http_parser_settings settings, string data, uint len);
 	}
 	
 	public struct http_parser

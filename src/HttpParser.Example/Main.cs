@@ -23,8 +23,16 @@ namespace HttpParser.Example
 				"\r\n" + 
 				"World";
 			
-			Parse (data);
-			Parse (data2);
+			//var stopwatch = new System.Diagnostics.Stopwatch ();
+			
+			//stopwatch.Start ();
+			//for (var i = 0; i < 10000; i++) {
+				//Parse (data);
+				Parse (data2);
+			//}
+			
+			//stopwatch.Stop ();
+			//Console.WriteLine (stopwatch.ElapsedMilliseconds);
 		}
 		
 		private static void Parse (string data)
