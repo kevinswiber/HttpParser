@@ -7,18 +7,16 @@ namespace HttpParser.Example
 {
 	class MainClass
 	{
-		private static http_data_cb printData (string label)
+		private static Func<HttpParser, string, int> printData (string label)
 		{
-			return (parserPtr, at, len) =>
+			return (parser, field) =>
 			{
-				var field = at.Substring (0, len);
 				Console.WriteLine (label + ": " + field);
-					
 				return 0;
 			};
 		}
 		
-		private static http_cb print (string label)
+		private static Func<HttpParser, int> print (string label)
 		{
 			return _ => {
 				Console.WriteLine (label + " fired");
@@ -48,19 +46,18 @@ namespace HttpParser.Example
 		
 		private static void Parse (string data)
 		{
-			var settings = new http_parser_settings ();
-			settings.on_header_field = printData ("on header field");
-			settings.on_header_value = printData ("on header value");
-			settings.on_url = printData ("on url");
-			settings.on_body = printData ("on body");
-			settings.on_headers_complete = print ("headers complete");
-			settings.on_message_begin = print ("message begin");
-			settings.on_message_complete = print ("message complete");
-
 			var parser = HttpParser.Create ();
 			parser.Initialize (HttpParserType.Request);
 			
-			parser.Execute (settings, data);
+			parser.OnHeaderField = printData ("on header field");
+			parser.OnHeaderValue = printData ("on header value");
+			parser.OnUrl = printData ("on url");
+			parser.OnBody = printData ("on body");
+			parser.OnHeadersComplete = print ("headers complete");
+			parser.OnMessageBegin = print ("message begin");
+			parser.OnMessageComplete = print ("message complete");
+			
+			parser.Execute (data);
 		}
 	}
 }

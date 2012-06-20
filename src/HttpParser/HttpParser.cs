@@ -7,6 +7,7 @@ namespace HttpParser
 	public class HttpParser
 	{
 		private http_parser _parser;
+		private http_parser_settings _settings;
 		
 		public HttpParser () : this(new http_parser())
 		{
@@ -22,9 +23,9 @@ namespace HttpParser
 			NativeHttpParser.http_parser_init (ref _parser, type);
 		}
 		
-		public void Execute (http_parser_settings settings, string data)
+		public void Execute (string data)
 		{
-			NativeHttpParser.http_parser_execute (ref _parser, ref settings, data, (uint)data.Length);
+			NativeHttpParser.http_parser_execute (ref _parser, ref _settings, data, (uint)data.Length);
 		}
 		
 		public static HttpParser Create ()
@@ -42,6 +43,41 @@ namespace HttpParser
 		{
 			var parser = (http_parser)Marshal.PtrToStructure (parserPtr, typeof(http_parser));
 			return Create (parser);
+		}
+		
+		public Func<HttpParser, int> OnMessageBegin
+		{
+			set { _settings.on_message_begin = CreateCallback(value); }
+		}
+		
+		public Func<HttpParser, int> OnMessageComplete
+		{
+			set { _settings.on_message_complete = CreateCallback(value); }
+		}
+		
+		public Func<HttpParser, int> OnHeadersComplete
+		{
+			set { _settings.on_headers_complete = CreateCallback(value); }
+		}
+		
+		public Func<HttpParser, string, int> OnHeaderField
+		{
+			set { _settings.on_header_field = CreateDataCallback (value); }
+		}
+		
+		public Func<HttpParser, string, int> OnHeaderValue
+		{
+			set { _settings.on_header_value = CreateDataCallback (value); }
+		}
+		
+		public Func<HttpParser, string, int> OnUrl
+		{
+			set { _settings.on_url = CreateDataCallback (value); }
+		}
+		
+		public Func<HttpParser, string, int> OnBody
+		{
+			set { _settings.on_body = CreateDataCallback (value); }
 		}
 		
 		public HttpParserType Type
@@ -112,6 +148,27 @@ namespace HttpParser
 		public object Data
 		{
 			get { return _parser.data; }
+		}
+		
+		private static http_cb CreateCallback (Func<HttpParser, int> callback)
+		{
+			var inner = callback;
+			return (http_cb)((parserPtr) =>
+			{
+				var parser = HttpParser.Create (parserPtr);
+				return inner.Invoke (parser);
+			});
+		}
+		
+		private static http_data_cb CreateDataCallback (Func<HttpParser, string, int> callback)
+		{
+			var inner = callback;
+			return (http_data_cb)((parserPtr, at, len) =>
+			{
+				var parser = HttpParser.Create (parserPtr);
+				var data = at.Substring (0, len);
+				return inner.Invoke (parser, data);
+			});
 		}
 	}
 }
