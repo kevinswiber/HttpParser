@@ -6,24 +6,7 @@ using HttpParser.Native;
 namespace HttpParser.Example
 {
 	class MainClass
-	{
-		private static Func<HttpParser, string, int> printData (string label)
-		{
-			return (parser, field) =>
-			{
-				Console.WriteLine (label + ": " + field);
-				return 0;
-			};
-		}
-		
-		private static Func<HttpParser, int> print (string label)
-		{
-			return _ => {
-				Console.WriteLine (label + " fired");
-				return 0;
-			};
-		}
-		
+	{		
 		public static void Main (string[] args)
 		{
 			var data = "GET /test HTTP/1.1\r\n" +
@@ -58,6 +41,23 @@ namespace HttpParser.Example
 			parser.OnMessageComplete = print ("message complete");
 			
 			parser.Execute (data);
+		}
+		
+		private static Func<HttpParser, string, int> printData (string label)
+		{
+			return (parser, field) =>
+			{
+				Console.WriteLine (label + ": " + field);
+				return 0;
+			};
+		}
+		
+		private static Func<HttpParser, int> print (string label)
+		{
+			return _ => {
+				Console.WriteLine (label + " fired");
+				return 0;
+			};
 		}
 	}
 }
