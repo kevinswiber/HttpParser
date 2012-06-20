@@ -1,4 +1,0 @@
-/Users/kswiber/projects/build/HttpParser.dll.mdb
-/Users/kswiber/projects/build/HttpParser.dll
-/Users/kswiber/projects/HttpParser/src/HttpParser/obj/Debug/HttpParser.dll
-/Users/kswiber/projects/HttpParser/src/HttpParser/obj/Debug/HttpParser.dll.mdb
