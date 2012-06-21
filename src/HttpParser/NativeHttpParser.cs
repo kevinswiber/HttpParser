@@ -24,7 +24,7 @@ namespace HttpParser.Native
 		public byte index;
 		
 		public uint nread;
-		public long content_length;
+		public ulong content_length;
 		
 		public ushort http_major;
 		public ushort http_minor;

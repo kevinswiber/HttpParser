@@ -28,6 +28,23 @@ namespace HttpParser
 			NativeHttpParser.http_parser_execute (ref _parser, ref _settings, data, (uint)data.Length);
 		}
 		
+		public bool ShouldKeepAlive ()
+		{
+			if (HttpMajor > 0 && HttpMinor > 0) {
+				// HTTP/1.1
+				if ((Flags & HttpParserFlags.ConnectionClose) == HttpParserFlags.ConnectionClose) {
+					return false;
+				}
+			} else {
+				// HTTP/1.0 or earlier
+				if ((Flags & HttpParserFlags.ConnectionKeepAlive) == 0) {
+					return false;
+				}
+			}
+			
+			return !MessageNeedsEof (this);
+		}
+		
 		public static HttpParser Create ()
 		{
 			return new HttpParser ();
@@ -110,7 +127,7 @@ namespace HttpParser
 			get { return _parser.nread; }
 		}
 		
-		public long ContentLength 
+		public ulong ContentLength 
 		{ 
 			get { return _parser.content_length; } 
 		}
@@ -123,6 +140,11 @@ namespace HttpParser
 		public ushort HttpMinor
 		{
 			get { return _parser.http_minor; }
+		}
+		
+		public ushort StatusCode
+		{
+			get { return _parser.status_code; }
 		}
 		
 		public HttpMethod Method 
@@ -169,6 +191,26 @@ namespace HttpParser
 				var data = at.Substring (0, len);
 				return inner.Invoke (parser, data);
 			});
+		}
+		
+		private static bool MessageNeedsEof (HttpParser parser)
+		{
+			if (parser.Type == HttpParserType.Request) {
+				return false;
+			}
+			
+			if (parser.StatusCode / 100 == 1 || // 1xx e.g. Continue 
+				parser.StatusCode == 204 || // No Content
+				parser.StatusCode == 304 || // Not Modified
+				(parser.Flags & HttpParserFlags.SkipBody) == HttpParserFlags.SkipBody) { // response to a HEAD request
+				return false;
+			}
+			
+			if ((parser.Flags & HttpParserFlags.Chunked) == HttpParserFlags.Chunked || parser.ContentLength != ulong.MaxValue) {
+				return false;
+			}
+			
+			return true;
 		}
 	}
 }
